@@ -1,7 +1,7 @@
 Markovy
 =======
 
-Me learning how to do some text generation using Markov chains. Josh Adams of Elixir Rips fame has done an episode, which ultimately piqued my interest in this. You could also check that out.
+Me learning how to do some text generation using Markov chains. Josh Adams of Elixir Sips fame has done an episode, which ultimately piqued my interest in this. You could also check that out.
 
 ## The Algorithm
 
