@@ -10,15 +10,14 @@ defmodule Markovy do
       build(dict, tokens)
     end
 
-    def build(dict, [prefix_1, prefix_2, suffix|rest]) do
-      prefix   = "#{prefix_1} #{prefix_2}"
+    def build(dict, [prefix, suffix|rest]) do
       new_dict = case HashDict.get(dict, prefix) do
         nil ->
-          HashDict.put_new(dict, prefix, [suffix])
+          HashDict.put(dict, prefix, [suffix])
         suffixes ->
-          HashDict.put_new(dict, prefix, [suffix|suffixes])
+          HashDict.put(dict, prefix, [suffix|suffixes])
       end
-      build(new_dict, [prefix_2, suffix|rest])
+      build(new_dict, [suffix|rest])
     end
 
     def build(dict, _source) do
@@ -31,18 +30,17 @@ defmodule Markovy do
   end
 
   def generate_sentence(dict, seed_prefix, max_length) when is_binary(seed_prefix) do
-    [prefix_1, prefix_2] = String.split(seed_prefix)
-    generate_sentence(dict, [prefix_2, prefix_1], 0, max_length)
+    generate_sentence(dict, [seed_prefix], 0, max_length)
   end
 
   def generate_sentence(_dict, result, max_length, max_length) do
     process_result(result)
   end
 
-  def generate_sentence(dict, [prefix_2, prefix_1|rest] = list, current_length, max_length) do
-    case next(dict, "#{prefix_1} #{prefix_2}") do
+  def generate_sentence(dict, [prefix|rest] = list, current_length, max_length) do
+    case next(dict, prefix) do
       nil  ->
-        process_result(rest)
+        process_result([prefix|rest])
       next ->
         generate_sentence(dict, [next|list], current_length+1, max_length)
     end
