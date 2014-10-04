@@ -9,7 +9,7 @@ The (super simplified) algorithm involves 2 steps:
 
 ### Dictionary Generation
 
-For every pair of words in the text (called the prefix), record the word that comes after that (called the suffix). 
+For every word in the text (called the prefix), record the word that comes after that (called the suffix). 
 
 ### Text Generation
 
@@ -17,9 +17,9 @@ To generate text, set `x`, and `y` to be the first 2 words of the text:
 
 ```
 loop do
-  randomly choose z from one of the suffixes of the prefix x,y
-  print z
-  replace x,y by y,z
+  randomly choose z from one of the suffixes of the prefix x
+  print y
+  replace x by y
   repeat loop
 end
 ```
