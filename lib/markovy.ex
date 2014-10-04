@@ -1,6 +1,7 @@
 defmodule Markovy do
   defmodule Dictionary do
     def new do
+      :random.seed(:os.timestamp)
       HashDict.new
     end
 
