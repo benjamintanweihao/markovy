@@ -1,7 +1,4 @@
 defmodule Markovy.Dictionary do
-  def start_link do
-    Agent.start_link(fn -> new end)
-  end
 
   def new do
     :random.seed(:os.timestamp)
@@ -24,7 +21,7 @@ defmodule Markovy.Dictionary do
   end
 
   def build(dict, _source) do
-    Agent.update(__MODULE__, fn _ -> dict end)
+    dict
   end
 
 end
